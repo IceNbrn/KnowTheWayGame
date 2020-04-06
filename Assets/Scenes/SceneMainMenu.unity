@@ -2470,7 +2470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e26d26472a642847b77d1ec91675987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Scenes/Level0
+  sceneToLoad: Scenes/Levels/Level0
   findPlayerPanel: {fileID: 132000331}
   waitingStatusPanel: {fileID: 1183966292}
   waitingStatusText: {fileID: 998147239}

@@ -13,6 +13,7 @@ public class PickUpObject : MonoBehaviour
 
     private RaycastHit m_Hit;
     private GameObject m_GrabbedObject;
+    private Transform m_CameraPosition;
 
     private void Awake()
     {
@@ -38,13 +39,13 @@ public class PickUpObject : MonoBehaviour
 
     private void Start()
     {
-        //holdObjectPosition = transform.Find("PlayerCamera").Find("HoldObject");
+        m_CameraPosition = GetComponent<PlayerCameraController>().CameraTransform;
     }
     
     private void OnPerformedInteraction(InputAction.CallbackContext obj)
     {
         Debug.Log($"Pressing");
-        if (Physics.Raycast(transform.position, transform.forward, out m_Hit, 2f) && m_Hit.transform.gameObject.CompareTag("PickUp") &&
+        if (Physics.Raycast(m_CameraPosition.position, m_CameraPosition.forward, out m_Hit, 2f) && m_Hit.transform.gameObject.CompareTag("PickUp") &&
             m_Hit.transform.GetComponent<Rigidbody>())
         {
             PhotonView view = m_Hit.transform.GetComponent<PhotonView>();

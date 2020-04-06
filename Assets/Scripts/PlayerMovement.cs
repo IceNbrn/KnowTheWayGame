@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     public float doubleSpeed;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
-
-    
     
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -25,13 +23,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private Vector3 m_Velocity;
     private bool m_bIsGrounded;
     private bool m_bIsCrouched;
-    private Transform m_CameraTransform;
-
-    public Transform CameraTransform
-    {
-        get { return m_CameraTransform; }
-        set { m_CameraTransform = value; }
-    }
 
     private void Awake()
     {
@@ -39,7 +30,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             m_Controls = new DJA();
 
         m_Controls.Player.Jump.performed += JumpOnperformed;
-
+        m_Controls.Player.Sprint.performed += SprintOnperformed;
+        m_Controls.Player.Sprint.canceled += SprintOncanceled;
     }
 
     public override void OnEnable()
@@ -68,13 +60,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 m_Velocity.y = -2f;
 
             Move();
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !m_bIsCrouched)
-                speed = doubleSpeed;
-
-            if (Input.GetKeyUp(KeyCode.LeftShift) && !m_bIsCrouched)
-                speed = defaultSpeed;
-
+            
             if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
             {
                 speed /= 2.0f;
@@ -97,7 +83,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     private void Move()
     {
-
         Vector2 movementInput = m_Controls.Player.Move.ReadValue<Vector2>();
         Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
 
@@ -108,5 +93,17 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         if (m_bIsGrounded)
             m_Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+    }
+
+    private void SprintOnperformed(InputAction.CallbackContext obj)
+    {
+        if (!m_bIsCrouched)
+            speed = doubleSpeed;
+    }
+
+    private void SprintOncanceled(InputAction.CallbackContext obj)
+    {
+        if (!m_bIsCrouched)
+            speed = defaultSpeed;
     }
 }

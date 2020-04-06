@@ -207,7 +207,7 @@ namespace UI.Menus
                 waitingStatusText.text = "Player found";
 
                 Debug.Log("1 | Matching is ready to begin");
-                PhotonNetwork.LoadLevel("SampleScene");
+                PhotonNetwork.LoadLevel(sceneToLoad);
             }
         }
     }

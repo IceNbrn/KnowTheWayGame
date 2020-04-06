@@ -22,7 +22,7 @@ public class ClickButton : MonoBehaviour
 
     void Start()
     {
-        m_CameraPosition = GetComponent<PlayerMovement>().CameraTransform;
+        m_CameraPosition = GetComponent<PlayerCameraController>().CameraTransform;
     }
 
     private void OnPerformedInteraction(InputAction.CallbackContext obj)

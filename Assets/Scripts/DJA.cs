@@ -65,6 +65,14 @@ public class @DJA : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""62503724-1974-42f8-afae-fef92a50740d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -302,7 +310,7 @@ public class @DJA : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""797382c4-b07e-4fb8-8158-9f4b0461d37c"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -329,6 +337,28 @@ public class @DJA : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""InteractionButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34a6734b-8194-4d54-9a83-2172a91e9f7c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60963bdb-b304-4275-80d5-89823a8f34af"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -909,6 +939,7 @@ public class @DJA : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_InteractionButton = m_Player.FindAction("InteractionButton", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -977,6 +1008,7 @@ public class @DJA : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_InteractionButton;
+    private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
         private @DJA m_Wrapper;
@@ -987,6 +1019,7 @@ public class @DJA : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @InteractionButton => m_Wrapper.m_Player_InteractionButton;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1014,6 +1047,9 @@ public class @DJA : IInputActionCollection, IDisposable
                 @InteractionButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionButton;
                 @InteractionButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionButton;
                 @InteractionButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionButton;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1036,6 +1072,9 @@ public class @DJA : IInputActionCollection, IDisposable
                 @InteractionButton.started += instance.OnInteractionButton;
                 @InteractionButton.performed += instance.OnInteractionButton;
                 @InteractionButton.canceled += instance.OnInteractionButton;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -1206,6 +1245,7 @@ public class @DJA : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnInteractionButton(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
