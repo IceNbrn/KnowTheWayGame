@@ -298,6 +298,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4d2349da-ece3-4b52-a40c-96eebfd97aa8
     m_ActionName: Player/InteractionButton[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 62503724-1974-42f8-afae-fef92a50740d
+    m_ActionName: Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -338,8 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 6
-  playerBody: {fileID: 223698055439055702}
-  camera: {fileID: 4649375294336747876}
+  m_PlayerBody: {fileID: 223698055439055702}
+  m_Camera: {fileID: 4649375294336747876}
 --- !u!114 &8514003565458522190
 MonoBehaviour:
   m_ObjectHideFlags: 0

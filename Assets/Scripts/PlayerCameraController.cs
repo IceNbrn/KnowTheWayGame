@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Photon.Pun;
 using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviourPunCallbacks
 {
-    [Header("Camera")]
     [SerializeField] private float mouseSensitivity = 8.0f;
 
-    [SerializeField] private Transform playerBody;
-    [SerializeField] private Camera camera = null;
+    [SerializeField, InspectorName("PlayerBody")] private Transform m_PlayerBody = null;
+    [SerializeField, InspectorName("Camera")] private Camera m_Camera = null;
     
-    public Transform CameraTransform => camera.transform;
+    public Transform CameraTransform => m_Camera.transform;
 
     private float m_RotationX = 0.0f;
 
@@ -30,7 +30,7 @@ public class PlayerCameraController : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            camera.gameObject.SetActive(true);
+            m_Camera.gameObject.SetActive(true);
 
             enabled = true;
 
@@ -55,8 +55,8 @@ public class PlayerCameraController : MonoBehaviourPunCallbacks
 
             m_RotationX -= movement.y;
             m_RotationX = Mathf.Clamp(m_RotationX, -90.0f, 90.0f);
-            camera.transform.localRotation = Quaternion.Euler(m_RotationX, 0f, 0f);
-            playerBody.Rotate(Vector3.up * movement.x);
+            m_Camera.transform.localRotation = Quaternion.Euler(m_RotationX, 0f, 0f);
+            m_PlayerBody.Rotate(Vector3.up * movement.x);
         }
     }
 
