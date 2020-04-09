@@ -10,9 +10,7 @@ namespace Controllers
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviourPunCallbacks
     {
-
         public float defaultSpeed = 5f;
-        public float doubleSpeed;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
 
@@ -21,6 +19,7 @@ namespace Controllers
         public LayerMask groundMask;
 
         private float m_Speed;
+        private float m_SprintSpeed;
         private CharacterController m_Controller;
         private DJA m_Controls;
         private Vector3 m_Velocity;
@@ -48,7 +47,7 @@ namespace Controllers
         void Start()
         {
             m_Speed = defaultSpeed;
-            doubleSpeed = m_Speed * 2;
+            m_SprintSpeed = m_Speed * 1.5f;
             m_Controller = GetComponent<CharacterController>();
         }
 
@@ -67,7 +66,7 @@ namespace Controllers
                 if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
                 {
                     // Player is Crouching
-                    m_Speed /= doubleSpeed;
+                    m_Speed /= m_SprintSpeed;
                     m_bIsCrouched = true;
                     transform.localScale = new Vector3(1f, 0.7f, 1f);
                     transform.position = new Vector3(1f, transform.position.y - 0.7f, 1f);
@@ -75,7 +74,7 @@ namespace Controllers
                 else if (Input.GetKeyDown(KeyCode.LeftControl) && m_bIsCrouched)
                 {
                     // Player is not Crouching
-                    m_Speed *= doubleSpeed;
+                    m_Speed *= m_SprintSpeed;
                     m_bIsCrouched = false;
                     transform.localScale = new Vector3(1f, 1f, 1f);
                     transform.position = new Vector3(1f, transform.position.y + 0.7f, 1f);
@@ -103,7 +102,7 @@ namespace Controllers
         private void SprintOnperformed(InputAction.CallbackContext obj)
         {
             if (!m_bIsCrouched)
-                m_Speed = doubleSpeed;
+                m_Speed = m_SprintSpeed;
         }
 
         private void SprintOncanceled(InputAction.CallbackContext obj)
