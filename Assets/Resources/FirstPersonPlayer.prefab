@@ -217,7 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: 459aa8c84bfc5294991d35e32835ec63,
+    type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -319,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f644e8a69a8404c9dc8d1e924fbd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   defaultSpeed: 5
   doubleSpeed: 0
   gravity: -19.6

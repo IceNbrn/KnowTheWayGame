@@ -80,8 +80,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 0.07
-    - _Brightness: 3
+    - _Alpha: 0.08
+    - _Brightness: 0.74
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -118,6 +118,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.47472408, g: 0.6354574, b: 0.7924528, a: 1}
+    - _MainColor: {r: 0, g: 0.5019608, b: 0.99215686, a: 1}
     - _RimColor: {r: 0, g: 0.50588226, b: 1, a: 1}
     - _ScanlineColor: {r: 0.0719575, g: 0.9485294, b: 0, a: 1}
