@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Controllers
 {
@@ -17,14 +19,14 @@ namespace Controllers
 
         private float m_RotationX = 0.0f;
 
-        private DJA controls;
+        private DJA m_Controls;
 
         private DJA Controls
         {
             get
             {
-                if (controls != null) return controls;
-                return controls = new DJA();
+                if (m_Controls != null) return m_Controls;
+                return m_Controls = new DJA();
             }
         }
 
@@ -38,7 +40,7 @@ namespace Controllers
 
                 Cursor.lockState = CursorLockMode.Locked;
 
-                //Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+                //m_Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
             }
         }
 

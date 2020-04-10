@@ -70,7 +70,7 @@ public class @DJA : IInputActionCollection, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""62503724-1974-42f8-afae-fef92a50740d"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
