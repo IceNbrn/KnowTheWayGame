@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 4
+  doubleSpeed: 0
   gravity: -19.6
   jumpHeight: 1
   groundCheck: {fileID: 860311518102022100}

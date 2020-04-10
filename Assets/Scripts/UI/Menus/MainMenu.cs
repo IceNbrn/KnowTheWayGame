@@ -198,7 +198,7 @@ namespace UI.Menus
         }
 
         // This is for the player who is already in the lobby
-        public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+        public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayerPerRoom)
             {
