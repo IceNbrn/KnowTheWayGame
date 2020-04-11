@@ -21,4 +21,6 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
         Debug.Log($"SpawnPoint: {spawnPoint.position}");
     }
+
+    
 }

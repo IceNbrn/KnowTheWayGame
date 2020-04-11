@@ -10,8 +10,7 @@ namespace Player
     {
         [SerializeField, InspectorName("Default Health")]
         private int m_DefaultHealth;
-
-
+        
         private CharacterController m_CharacterController;
         private Vector3 m_SpawnPosition;
         private Quaternion m_SpawnRotation;
@@ -24,6 +23,7 @@ namespace Player
             m_Health = m_DefaultHealth;
             m_Username = photonView.Owner.NickName;
             m_CharacterController = GetComponent<CharacterController>();
+
         }
 
         void Update()

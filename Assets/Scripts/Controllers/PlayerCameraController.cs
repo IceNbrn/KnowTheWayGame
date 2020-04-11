@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Photon.Pun;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
@@ -14,6 +15,8 @@ namespace Controllers
 
         [SerializeField, InspectorName("PlayerBody")] private Transform m_PlayerBody = null;
         [SerializeField, InspectorName("Camera")] private Camera m_Camera = null;
+
+        private PlayerUIController m_PlayerUI;
 
         public Transform CameraTransform => m_Camera.transform;
 
@@ -44,14 +47,22 @@ namespace Controllers
             }
         }
 
-        public override void OnEnable() => Controls.Enable();
+        public override void OnEnable() => Controls.Player.Look.Enable();
 
-        public override void OnDisable() => Controls.Disable();
+        public override void OnDisable() => Controls.Player.Look.Disable();
+
+        private void Start()
+        {
+            m_PlayerUI = GetComponent<PlayerUIController>();
+        }
 
         private void Update()
         {
             if (photonView.IsMine)
             {
+                // If Player UI is active means that the player can't look around.
+                if (m_PlayerUI.IsUIActive) return;
+
                 Vector2 movement = Controls.Player.Look.ReadValue<Vector2>();
 
                 movement.x *= mouseSensitivity * Time.deltaTime;

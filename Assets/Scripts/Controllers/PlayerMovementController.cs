@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,7 @@ namespace Controllers
         private Vector3 m_Velocity;
         private bool m_bIsGrounded;
         private bool m_bIsCrouched;
+        private PlayerUIController m_PlayerUI;
 
         private void Awake()
         {
@@ -49,6 +51,7 @@ namespace Controllers
             m_Speed = defaultSpeed;
             m_SprintSpeed = m_Speed * 1.5f;
             m_Controller = GetComponent<CharacterController>();
+            m_PlayerUI = GetComponent<PlayerUIController>();
         }
 
         // Update is called once per frame
@@ -87,6 +90,8 @@ namespace Controllers
 
         private void Move()
         {
+            // If Player UI is active means that the player can't move.
+            if (m_PlayerUI.IsUIActive) return;
 
             Vector2 movementInput = m_Controls.Player.Move.ReadValue<Vector2>();
             Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
