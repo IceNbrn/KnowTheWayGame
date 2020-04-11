@@ -9981,7 +9981,7 @@ GameObject:
   - component: {fileID: 960605743}
   - component: {fileID: 960605742}
   - component: {fileID: 960605741}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrateMediumObstacle
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -13624,7 +13624,7 @@ GameObject:
   - component: {fileID: 1513773289}
   - component: {fileID: 1513773288}
   - component: {fileID: 1513773287}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrateMediumObstacle
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -18759,9 +18759,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1887717137}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CratesPickup
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23568,7 +23568,7 @@ GameObject:
   - component: {fileID: 2769185031281440566}
   - component: {fileID: 2769185031281440565}
   - component: {fileID: 2769185031281440564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrateMediumObstacle2
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -24960,7 +24960,7 @@ GameObject:
   - component: {fileID: 8152219385745874000}
   - component: {fileID: 8152219385745873999}
   - component: {fileID: 8152219385745873998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrateLargeObstacle
   m_TagString: PickUp
   m_Icon: {fileID: 0}

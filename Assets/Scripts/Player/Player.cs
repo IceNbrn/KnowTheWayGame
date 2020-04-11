@@ -29,6 +29,8 @@ namespace Player
         {
             if(Input.GetKeyDown(KeyCode.R))
                 TakeDamage(20);
+
+            IsAlive();
         }
 
         private void TakeDamage(int damage)
@@ -38,8 +40,17 @@ namespace Player
             Debug.Log($"Taking Damage... (Value: {damage})");
             m_Health -= damage;
             Debug.Log($"Health: {m_Health}");
+            
+        }
+
+        private bool IsAlive()
+        {
             if (m_Health <= 0)
+            {
                 Die();
+                return true;
+            }
+            return false;
         }
 
         private void Die()
@@ -52,13 +63,13 @@ namespace Player
         private void Respawn()
         {
             Debug.Log("Respawning...");
-            transform.position = m_SpawnPosition;
-            transform.rotation = m_SpawnRotation;
+            gameObject.transform.position = m_SpawnPosition;
+            gameObject.transform.rotation = m_SpawnRotation;
             CanMove = true;
             Debug.Log($"SpawnPosition: {m_SpawnPosition}\n" +
                       $"SpawnRotation: {m_SpawnRotation}\n" +
-                      $"TransformPosition: {transform.position}\n" +
-                      $"TransformRotation: {transform.rotation}");
+                      $"TransformPosition: {gameObject.transform.position}\n" +
+                      $"TransformRotation: {gameObject.transform.rotation}");
             Debug.Log("Respawned!");
         }
 
