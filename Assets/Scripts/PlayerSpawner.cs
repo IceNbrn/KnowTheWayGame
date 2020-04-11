@@ -14,16 +14,11 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     {
         Debug.Log($"PlayerActorNumber: {PhotonNetwork.LocalPlayer.ActorNumber}");
 
-        Vector3 spawnPointPosition = SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].position;
-        Quaternion spawnPointRotation = SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].rotation;
+        Transform spawnPoint = SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1];
 
-        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPointPosition, spawnPointRotation);
-        player.GetComponent<Player.Player>().SetSpawnPoint(spawnPointPosition, spawnPointRotation);
-        /*
-        playerCamera.GetComponent<MouseLook>().SetPlayerBody(player.transform);
-        playerCamera.transform.parent = player.transform;
-        playerCamera.transform.position = player.transform.position + new Vector3(0f, 0.64f, 0.3f);
-        playerCamera.transform.rotation = player.transform.rotation;
-        player.GetComponent<PlayerMovement>().CameraTransform = playerCamera.transform;*/
+        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+        player.GetComponent<Player.Player>().SetSpawnPoint(spawnPoint.position, spawnPoint.rotation);
+
+        Debug.Log($"SpawnPoint: {spawnPoint.position}");
     }
 }
