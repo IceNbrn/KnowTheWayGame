@@ -42,6 +42,7 @@ namespace Controllers
                 enabled = true;
 
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
                 //m_Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
             }

@@ -9,7 +9,6 @@ public class ClickButton : MonoBehaviour
 {
     private RaycastHit m_Hit;
     private DJA m_Controls;
-    private RotateObject m_ObjectToRotate;
     private Transform m_CameraPosition;
 
     // Start is called before the first frame update
@@ -19,6 +18,21 @@ public class ClickButton : MonoBehaviour
             m_Controls = new DJA();
 
         m_Controls.Player.InteractionButton.performed += OnPerformedInteraction;
+        m_Controls.Player.InteractionButton.started += InteractionButtonOnStarted;
+        m_Controls.Player.InteractionButton.canceled += InteractionButtonOnStarted;
+    }
+
+    private void InteractionButtonOnStarted(InputAction.CallbackContext obj)
+    {
+        if (Physics.Raycast(m_CameraPosition.position, m_CameraPosition.forward, out m_Hit, 2f)
+        )
+        {
+            if (m_Hit.transform.GetComponent<ActivateHologramBridge>())
+            {
+                ActivateHologramBridge bridge = m_Hit.transform.GetComponent<ActivateHologramBridge>();
+                bridge.ToggleBridgeStatus();
+            }
+        }
     }
 
     void Start()
@@ -33,24 +47,28 @@ public class ClickButton : MonoBehaviour
         {
             if (m_Hit.transform.GetComponent<RotateObject>())
             {
-                m_ObjectToRotate = m_Hit.transform.GetComponent<RotateObject>();
+                RotateObject objectToRotate = m_Hit.transform.GetComponent<RotateObject>();
 
-                PhotonView view = m_ObjectToRotate.ObjectToRotate.GetComponent<PhotonView>();
+                PhotonView view = objectToRotate.ObjectToRotate.GetComponent<PhotonView>();
                 view.TransferOwnership(PhotonNetwork.LocalPlayer);
 
                 if (view.IsMine)
                 {
                     if (m_Hit.transform.CompareTag("Button"))
                     {
-                        m_ObjectToRotate.Rotate(new Vector3(0.0f, 0.0f, 45.0f), view);
+                        objectToRotate.Rotate(new Vector3(0.0f, 0.0f, 45.0f), view);
                     }
                     else if (m_Hit.transform.CompareTag("Door"))
-                    {
-                        m_ObjectToRotate.Rotate(new Vector3(0.0f, -88f, 0.0f), view);
+                    { 
+                        objectToRotate.Rotate(new Vector3(0.0f, -88f, 0.0f), view);
                     }
                 }
-                
-            }
+            }/*
+            else if (m_Hit.transform.GetComponent<ActivateHologramBridge>())
+            {
+                ActivateHologramBridge bridge = m_Hit.transform.GetComponent<ActivateHologramBridge>();
+                bridge.ToggleBridgeStatus();
+            }*/
         }
     }
 

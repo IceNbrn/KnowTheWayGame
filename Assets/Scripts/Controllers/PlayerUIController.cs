@@ -73,14 +73,12 @@ namespace Player
             UI.SetActive(status);
             if (status)
             {
-#if UNITY_EDITOR
                 Cursor.lockState = CursorLockMode.None;
-#else
-                Cursor.lockState = CursorLockMode.Confined;
-#endif
+                Cursor.visible = true;
             }
             else
             {
+                Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
