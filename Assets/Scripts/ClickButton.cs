@@ -4,13 +4,15 @@ using Controllers;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class ClickButton : MonoBehaviour
 {
     private RaycastHit m_Hit;
     private DJA m_Controls;
     private Transform m_CameraPosition;
-
+    private ActivateHologramBridge m_TempBridge = null;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,18 +21,27 @@ public class ClickButton : MonoBehaviour
 
         m_Controls.Player.InteractionButton.performed += OnPerformedInteraction;
         m_Controls.Player.InteractionButton.started += InteractionButtonOnStarted;
-        m_Controls.Player.InteractionButton.canceled += InteractionButtonOnStarted;
+        m_Controls.Player.InteractionButton.canceled += InteractionButtonOnCanceled;
+    }
+
+    private void InteractionButtonOnCanceled(InputAction.CallbackContext obj)
+    {
+        if (m_TempBridge != null)
+        {
+            m_TempBridge.SetActive(false);
+            m_TempBridge = null;
+        }
     }
 
     private void InteractionButtonOnStarted(InputAction.CallbackContext obj)
     {
-        if (Physics.Raycast(m_CameraPosition.position, m_CameraPosition.forward, out m_Hit, 2f)
-        )
+        if (Physics.Raycast(m_CameraPosition.position, m_CameraPosition.forward, out m_Hit, 2f))
         {
             if (m_Hit.transform.GetComponent<ActivateHologramBridge>())
             {
                 ActivateHologramBridge bridge = m_Hit.transform.GetComponent<ActivateHologramBridge>();
                 bridge.ToggleBridgeStatus();
+                m_TempBridge = bridge;
             }
         }
     }
@@ -69,6 +80,20 @@ public class ClickButton : MonoBehaviour
                 ActivateHologramBridge bridge = m_Hit.transform.GetComponent<ActivateHologramBridge>();
                 bridge.ToggleBridgeStatus();
             }*/
+        }
+    }
+
+    private void Update()
+    {
+        if (m_TempBridge != null)
+        {
+            float distance = Vector3.Distance(transform.position, m_TempBridge.transform.position);
+            Debug.Log($"Distance: {distance}");
+            if (distance > 3f)
+            {
+                m_TempBridge.SetActive(false);
+                m_TempBridge = null;
+            }
         }
     }
 

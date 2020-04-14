@@ -14,7 +14,7 @@ public class PickUpObject : MonoBehaviour
 
     private RaycastHit m_Hit;
     private GameObject m_GrabbedObject;
-    private Transform m_CameraPosition;
+    private Transform m_CameraTransform;
 
     private void Awake()
     {
@@ -40,13 +40,13 @@ public class PickUpObject : MonoBehaviour
 
     private void Start()
     {
-        m_CameraPosition = GetComponent<PlayerCameraController>().CameraTransform;
+        m_CameraTransform = GetComponent<PlayerCameraController>().CameraTransform;
     }
     
     private void OnPerformedInteraction(InputAction.CallbackContext obj)
     {
         Debug.Log($"Pressing");
-        if (Physics.Raycast(m_CameraPosition.position, m_CameraPosition.forward, out m_Hit, 2f) && m_Hit.transform.gameObject.CompareTag("PickUp") &&
+        if (Physics.Raycast(m_CameraTransform.position, m_CameraTransform.forward, out m_Hit, 2f) && m_Hit.transform.gameObject.CompareTag("PickUp") &&
             m_Hit.transform.GetComponent<Rigidbody>())
         {
             PhotonView view = m_Hit.transform.GetComponent<PhotonView>();
@@ -74,7 +74,7 @@ public class PickUpObject : MonoBehaviour
 
         m_GrabbedObject.transform.GetComponent<Rigidbody>().useGravity = true;
         m_GrabbedObject.transform.GetComponent<Rigidbody>().isKinematic = false;
-        m_GrabbedObject.transform.GetComponent<Rigidbody>().AddForce(transform.forward * 5.0f, ForceMode.Impulse);
+        m_GrabbedObject.transform.GetComponent<Rigidbody>().AddForce(m_CameraTransform.forward * 5.0f, ForceMode.Impulse);
 
         m_GrabbedObject = null;
     }

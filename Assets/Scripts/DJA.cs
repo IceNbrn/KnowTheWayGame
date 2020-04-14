@@ -333,7 +333,7 @@ public class @DJA : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""60f7db8b-1289-42e9-9263-031e0ce86247"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""InteractionButton"",
