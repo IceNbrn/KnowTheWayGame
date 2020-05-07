@@ -11669,6 +11669,7 @@ GameObject:
   - component: {fileID: 960605743}
   - component: {fileID: 960605742}
   - component: {fileID: 960605741}
+  - component: {fileID: 960605748}
   m_Layer: 8
   m_Name: CrateMediumObstacle
   m_TagString: PickUp
@@ -11806,6 +11807,18 @@ Transform:
   m_Father: {fileID: 1887717137}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -83.783005, z: 0}
+--- !u!114 &960605748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960605740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d551e878237154d8abd9d8b677e65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &988134670
 GameObject:
   m_ObjectHideFlags: 0
@@ -16903,6 +16916,7 @@ GameObject:
   - component: {fileID: 1513773289}
   - component: {fileID: 1513773288}
   - component: {fileID: 1513773287}
+  - component: {fileID: 1513773294}
   m_Layer: 8
   m_Name: CrateMediumObstacle
   m_TagString: PickUp
@@ -17040,6 +17054,18 @@ Transform:
   m_Father: {fileID: 1887717137}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -83.783005, z: 0}
+--- !u!114 &1513773294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513773286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d551e878237154d8abd9d8b677e65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1518840202
 Mesh:
   m_ObjectHideFlags: 0
@@ -27687,6 +27713,7 @@ GameObject:
   - component: {fileID: 2769185031281440566}
   - component: {fileID: 2769185031281440565}
   - component: {fileID: 2769185031281440564}
+  - component: {fileID: 2769185031281440567}
   m_Layer: 8
   m_Name: CrateMediumObstacle2
   m_TagString: PickUp
@@ -27748,6 +27775,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2769185031281440567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769185031281440563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d551e878237154d8abd9d8b677e65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2769185031281676929
 Transform:
   m_ObjectHideFlags: 0
@@ -29488,6 +29527,7 @@ GameObject:
   - component: {fileID: 8152219385745874000}
   - component: {fileID: 8152219385745873999}
   - component: {fileID: 8152219385745873998}
+  - component: {fileID: 8152219385745874001}
   m_Layer: 8
   m_Name: CrateLargeObstacle
   m_TagString: PickUp
@@ -29549,6 +29589,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8152219385745874001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152219385745873997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d551e878237154d8abd9d8b677e65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8468759434821102108
 GameObject:
   m_ObjectHideFlags: 0
