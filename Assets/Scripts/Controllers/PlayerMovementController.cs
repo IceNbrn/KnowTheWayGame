@@ -27,6 +27,7 @@ namespace Controllers
         private bool m_bIsGrounded;
         private bool m_bIsCrouched;
         private PlayerUIController m_PlayerUI;
+        private Animator m_Animator;
 
         private void Awake()
         {
@@ -52,6 +53,7 @@ namespace Controllers
             m_SprintSpeed = m_Speed * 1.5f;
             m_Controller = GetComponent<CharacterController>();
             m_PlayerUI = GetComponent<PlayerUIController>();
+            m_Animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -94,27 +96,39 @@ namespace Controllers
             if (m_PlayerUI.IsUIActive) return;
 
             Vector2 movementInput = m_Controls.Player.Move.ReadValue<Vector2>();
+            if (movementInput.x > 0.0f || movementInput.y > 0.0f)
+            {
+                Debug.Log($"MovementInput: {movementInput}");
+                m_Animator.SetBool("isWalking", true);
+            }
+                
+            else
+                m_Animator.SetBool("isWalking", false);
             Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
 
             m_Controller.Move(move * (m_Speed * Time.deltaTime));
+            
         }
 
         private void JumpOnperformed(InputAction.CallbackContext obj)
         {
             if (m_bIsGrounded)
                 m_Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            m_Animator.SetTrigger("Jumping");
         }
 
         private void SprintOnperformed(InputAction.CallbackContext obj)
         {
             if (!m_bIsCrouched)
                 m_Speed = m_SprintSpeed;
+            m_Animator.SetBool("isRunning", true);
         }
 
         private void SprintOncanceled(InputAction.CallbackContext obj)
         {
             if (!m_bIsCrouched)
                 m_Speed = defaultSpeed;
+            m_Animator.SetBool("isRunning", false);
         }
 
         public CharacterController CharacterController => m_Controller;
