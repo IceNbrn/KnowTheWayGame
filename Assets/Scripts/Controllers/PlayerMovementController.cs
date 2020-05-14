@@ -31,6 +31,7 @@ namespace Controllers
 
         private void Awake()
         {
+            if (!photonView.IsMine) return;
             if (m_Controls == null)
                 m_Controls = new DJA();
 
@@ -41,6 +42,7 @@ namespace Controllers
 
         public override void OnEnable()
         {
+            if (!photonView.IsMine) return;
             m_Controls.Player.Enable();
         }
 
@@ -53,7 +55,7 @@ namespace Controllers
             m_SprintSpeed = m_Speed * 1.5f;
             m_Controller = GetComponent<CharacterController>();
             m_PlayerUI = GetComponent<PlayerUIController>();
-            m_Animator = GetComponent<Animator>();
+            m_Animator = GetComponentInChildren<Animator>();
         }
 
         // Update is called once per frame
@@ -68,22 +70,22 @@ namespace Controllers
 
                 Move();
 
-                if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
-                {
-                    // Player is Crouching
-                    m_Speed /= m_SprintSpeed;
-                    m_bIsCrouched = true;
-                    transform.localScale = new Vector3(1f, 0.7f, 1f);
-                    transform.position = new Vector3(1f, transform.position.y - 0.7f, 1f);
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftControl) && m_bIsCrouched)
-                {
-                    // Player is not Crouching
-                    m_Speed *= m_SprintSpeed;
-                    m_bIsCrouched = false;
-                    transform.localScale = new Vector3(1f, 1f, 1f);
-                    transform.position = new Vector3(1f, transform.position.y + 0.7f, 1f);
-                }
+                //if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
+                //{
+                //    // Player is Crouching
+                //    m_Speed /= m_SprintSpeed;
+                //    m_bIsCrouched = true;
+                //    transform.localScale = new Vector3(1f, 0.7f, 1f);
+                //    transform.position = new Vector3(1f, transform.position.y - 0.7f, 1f);
+                //}
+                //else if (Input.GetKeyDown(KeyCode.LeftControl) && m_bIsCrouched)
+                //{
+                //    // Player is not Crouching
+                //    m_Speed *= m_SprintSpeed;
+                //    m_bIsCrouched = false;
+                //    transform.localScale = new Vector3(1f, 1f, 1f);
+                //    transform.position = new Vector3(1f, transform.position.y + 0.7f, 1f);
+                //}
 
                 m_Velocity.y += gravity * Time.deltaTime;
                 m_Controller.Move(m_Velocity * Time.deltaTime);
@@ -101,9 +103,16 @@ namespace Controllers
                 Debug.Log($"MovementInput: {movementInput}");
                 m_Animator.SetBool("isWalking", true);
             }
-                
+            else if (movementInput.x < 0.0f || movementInput.y < 0.0f)
+            {
+                m_Animator.SetBool("isWalkingBackwards", true);
+            }
             else
+            {
                 m_Animator.SetBool("isWalking", false);
+                m_Animator.SetBool("isWalkingBackwards", false);
+            }
+
             Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
 
             m_Controller.Move(move * (m_Speed * Time.deltaTime));
@@ -112,6 +121,8 @@ namespace Controllers
 
         private void JumpOnperformed(InputAction.CallbackContext obj)
         {
+            if (!photonView.IsMine) return;
+
             if (m_bIsGrounded)
                 m_Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             m_Animator.SetTrigger("Jumping");
@@ -119,15 +130,13 @@ namespace Controllers
 
         private void SprintOnperformed(InputAction.CallbackContext obj)
         {
-            if (!m_bIsCrouched)
-                m_Speed = m_SprintSpeed;
+            m_Speed = m_SprintSpeed;
             m_Animator.SetBool("isRunning", true);
         }
 
         private void SprintOncanceled(InputAction.CallbackContext obj)
         {
-            if (!m_bIsCrouched)
-                m_Speed = defaultSpeed;
+            m_Speed = defaultSpeed;
             m_Animator.SetBool("isRunning", false);
         }
 
