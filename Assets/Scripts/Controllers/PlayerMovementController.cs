@@ -130,8 +130,11 @@ namespace Controllers
 
         private void SprintOnperformed(InputAction.CallbackContext obj)
         {
-            m_Speed = m_SprintSpeed;
-            m_Animator.SetBool("isRunning", true);
+            if (m_Animator.GetBool("isWalking"))
+            {
+                m_Speed = m_SprintSpeed;
+                m_Animator.SetBool("isRunning", true);
+            }
         }
 
         private void SprintOncanceled(InputAction.CallbackContext obj)
