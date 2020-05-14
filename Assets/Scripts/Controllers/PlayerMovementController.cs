@@ -63,12 +63,13 @@ namespace Controllers
         {
             if (photonView.IsMine)
             {
+                //Debug.Log(m_Speed);
                 m_bIsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
                 if (m_bIsGrounded && m_Velocity.y < 0)
                     m_Velocity.y = -2f;
 
-                Move();
+                Move();                
 
                 //if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
                 //{
@@ -111,6 +112,8 @@ namespace Controllers
             {
                 m_Animator.SetBool("isWalking", false);
                 m_Animator.SetBool("isWalkingBackwards", false);
+                m_Animator.SetBool("isRunning", false);
+                m_Speed = defaultSpeed;
             }
 
             Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
