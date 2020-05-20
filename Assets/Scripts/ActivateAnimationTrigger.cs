@@ -47,9 +47,12 @@ public class ActivateAnimationTrigger : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient) return false;
         Collider[] hitColliders = Physics.OverlapSphere(playerPosition, m_RadiusCheck);
+        int countPlayers = 0;
         foreach (var collider in hitColliders)
         {
             if (collider.gameObject.CompareTag(TagToTrigger))
+                countPlayers++;
+            if (countPlayers == 2)
                 return true;
         }
 
