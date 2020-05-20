@@ -38,7 +38,7 @@ public class ActivateAnimationTrigger : MonoBehaviour
         if (result)
         {
             m_Animator.SetTrigger("CloseDoor");
-            //PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         } 
             
     }
