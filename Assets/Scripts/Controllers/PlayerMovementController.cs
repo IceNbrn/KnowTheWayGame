@@ -46,7 +46,11 @@ namespace Controllers
             m_Controls.Player.Enable();
         }
 
-        public override void OnDisable() => m_Controls.Player.Disable();
+        public override void OnDisable()
+        {
+            if (!photonView.IsMine) return;
+            m_Controls.Player.Disable();
+        }
 
         // Start is called before the first frame update
         void Start()
