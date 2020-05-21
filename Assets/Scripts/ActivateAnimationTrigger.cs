@@ -37,6 +37,7 @@ public class ActivateAnimationTrigger : MonoBehaviour
 
         if (result)
         {
+            // TODO: Timer to load next level and maybe a text with a countdown
             m_Animator.SetTrigger("CloseDoor");
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         } 
