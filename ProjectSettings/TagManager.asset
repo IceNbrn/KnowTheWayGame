@@ -9,6 +9,7 @@ TagManager:
   - Button
   - AcidWater
   - Bullet
+  - '!PickUp'
   layers:
   - Default
   - TransparentFX
