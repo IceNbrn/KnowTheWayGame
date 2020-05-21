@@ -23,11 +23,11 @@ namespace Player
             m_Health = m_DefaultHealth;
             m_Username = photonView.Owner.NickName;
             m_CharacterController = GetComponent<CharacterController>();
-
         }
 
         void Update()
         {
+            // TODO: Remove this in the final version!
             if(Input.GetKeyDown(KeyCode.R))
                 TakeDamage(20);
 
@@ -57,7 +57,7 @@ namespace Player
         private void Respawn()
         {
             Debug.Log("Respawning...");
-
+            m_CharacterController.enabled = false;
             m_CharacterController.transform.position = m_SpawnPosition;
             m_CharacterController.transform.rotation = m_SpawnRotation;
             m_Health = m_DefaultHealth;
@@ -71,10 +71,9 @@ namespace Player
 
             Debug.Log("Collision");
             if (collider.CompareTag("AcidWater"))
-            {
-                m_CharacterController.enabled = false;
                 Respawn();
-            }
+            else if (collider.CompareTag("Bullet"))
+                Respawn();
                 
         }
 
