@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Button
   - AcidWater
+  - Bullet
   layers:
   - Default
   - TransparentFX
