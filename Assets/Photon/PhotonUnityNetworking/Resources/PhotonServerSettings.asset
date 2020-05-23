@@ -37,6 +37,7 @@ MonoBehaviour:
   - RPC_ToggleBridgeStatus
   - RPC_BridgeSetStatus
   - RPC_SetStatus
+  - RPC_OpenDoor
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

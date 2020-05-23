@@ -43,6 +43,11 @@ public class ClickButton : MonoBehaviour
                 bridge.ToggleBridgeStatus();
                 m_TempBridge = bridge;
             }
+            else if (m_Hit.transform.GetComponent<OpenGarageDoor>())
+            {
+                OpenGarageDoor openDoor = m_Hit.transform.GetComponent<OpenGarageDoor>();
+                openDoor.OpenDoor();
+            }
         }
     }
 

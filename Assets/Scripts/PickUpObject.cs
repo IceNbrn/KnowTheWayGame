@@ -17,6 +17,7 @@ public class PickUpObject : MonoBehaviour
     private Transform m_CameraTransform;
     private BoxPickup m_BoxPickup;
     private MeshCollider m_BoxCollider;
+    private CharacterController m_CharacterController;
 
     private void Awake()
     {
@@ -44,8 +45,9 @@ public class PickUpObject : MonoBehaviour
     private void Start()
     {
         m_CameraTransform = GetComponent<PlayerCameraController>().CameraTransform;
+        m_CharacterController = GetComponent<CharacterController>();
     }
-
+    
     private void OnPerformedInteraction(InputAction.CallbackContext obj)
     {
         if (Physics.Raycast(m_CameraTransform.position, m_CameraTransform.forward, out m_Hit, 2f) &&
@@ -105,6 +107,13 @@ public class PickUpObject : MonoBehaviour
                 m_GrabbedObject.transform.GetComponent<Rigidbody>().useGravity = true;
                 m_GrabbedObject.transform.GetComponent<Rigidbody>().isKinematic = false;
                 
+                ResetBoxStatus();
+            }
+            if (!m_CharacterController.enabled)
+            {
+                m_GrabbedObject.transform.GetComponent<Rigidbody>().useGravity = true;
+                m_GrabbedObject.transform.GetComponent<Rigidbody>().isKinematic = false;
+
                 ResetBoxStatus();
             }
         }

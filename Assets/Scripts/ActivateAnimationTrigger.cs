@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ActivateAnimationTrigger : MonoBehaviour
 {
     public GameObject GameObject;
+    public GameObject Ui;
     public string TagToTrigger = "Player";
 
     private Animator m_Animator;
@@ -37,16 +38,17 @@ public class ActivateAnimationTrigger : MonoBehaviour
 
         if (result)
         {
-            // TODO: Timer to load next level and maybe a text with a countdown
+            Ui.SetActive(true);
             m_Animator.SetTrigger("CloseDoor");
-            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            StartCoroutine(LoadNextLevelCorountine());
+            
         } 
             
     }
     
     private bool IsPlayerNearby(Vector3 playerPosition)
     {
-        if (!PhotonNetwork.IsMasterClient) return false;
+        //if (!PhotonNetwork.IsMasterClient) return false;
         Collider[] hitColliders = Physics.OverlapSphere(playerPosition, m_RadiusCheck);
         int countPlayers = 0;
         foreach (var collider in hitColliders)
@@ -58,5 +60,15 @@ public class ActivateAnimationTrigger : MonoBehaviour
         }
 
         return false;
+    }
+
+    IEnumerator LoadNextLevelCorountine()
+    {
+        yield return new WaitForSeconds(5);
+
+        Ui.SetActive(false);
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 }

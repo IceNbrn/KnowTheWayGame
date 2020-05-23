@@ -51,7 +51,7 @@ public class PressurePlate : MonoBehaviour
         if (AreAllPressurePlatesActive())
         {
             Debug.Log("All pressure plates are activated!!!!!!");
-            m_Animator.SetTrigger("OpenDoors");
+            m_Animator.SetTrigger("OpenDoor");
         }
     }
 

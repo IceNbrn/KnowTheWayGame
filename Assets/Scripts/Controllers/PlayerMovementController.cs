@@ -43,12 +43,14 @@ namespace Controllers
         public override void OnEnable()
         {
             if (!photonView.IsMine) return;
+            if (m_Controls == null) return;
             m_Controls.Player.Enable();
         }
 
         public override void OnDisable()
         {
             if (!photonView.IsMine) return;
+            if (m_Controls == null) return;
             m_Controls.Player.Disable();
         }
 

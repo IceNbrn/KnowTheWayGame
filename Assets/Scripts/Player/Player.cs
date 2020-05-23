@@ -72,9 +72,14 @@ namespace Player
             Debug.Log("Collision");
             if (collider.CompareTag("AcidWater"))
                 Respawn();
-            else if (collider.CompareTag("Bullet"))
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            if (!photonView.IsMine) return;
+
+            if (collision.gameObject.CompareTag("Bullet"))
                 Respawn();
-                
         }
 
         public string Username => m_Username;
@@ -85,7 +90,6 @@ namespace Player
             m_SpawnPosition = position;
             m_SpawnRotation = rotation;
         }
-
     }
 }
 
