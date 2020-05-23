@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
     public GameObject GameObject;
 
-    //private Animator m_Animator;
     public static uint PressurePlateActive = 0;
     public int NumberToBeActive = 4;
-    public 
+
+    private Animator m_Animator;
+    private bool m_bIsActivated;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +21,9 @@ public class PressurePlate : MonoBehaviour
         {
             Debug.LogError("[PressurePlate]: GameObject is null!");
             return;
-        }/*
-        m_Animator = GameObject.GetComponent<Animator>();*/
+        }
+        
+        m_Animator = GameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,18 +34,27 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (m_bIsActivated) return;
+
         if (!other.CompareTag("PickUp")) return;
+
+        m_bIsActivated = true;
+
         other.gameObject.tag = "!PickUp";
+        other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
         PressurePlateActive++;
+
         Debug.Log($"PressurePlates: {PressurePlateActive}");
 
         if (AreAllPressurePlatesActive())
         {
-            GameObject.SetActive(true);
             Debug.Log("All pressure plates are activated!!!!!!");
-            //m_Animator.
+            m_Animator.SetTrigger("OpenDoors");
         }
     }
 
     private bool AreAllPressurePlatesActive() => PressurePlateActive == NumberToBeActive;
+
 }
