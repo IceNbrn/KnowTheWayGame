@@ -21,7 +21,7 @@ public class OpenGarageDoor : MonoBehaviourPun
         if (m_bIsOpen) return;
         
         photonView.RPC("RPC_OpenDoor", RpcTarget.AllBuffered, true);
-        m_Animator.SetTrigger("OpenDoor");
+        m_Animator.SetTrigger("OpenDoorGarage");
     }
 
     [PunRPC]
