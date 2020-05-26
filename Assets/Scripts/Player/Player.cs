@@ -38,10 +38,7 @@ namespace Player
         {
             if (!photonView.IsMine) return;
 
-            Debug.Log($"Taking Damage... (Value: {damage})");
             m_Health -= damage;
-            Debug.Log($"Health: {m_Health}");
-            
         }
 
         private bool IsAlive()
@@ -56,20 +53,17 @@ namespace Player
         
         private void Respawn()
         {
-            Debug.Log("Respawning...");
             m_CharacterController.enabled = false;
             m_CharacterController.transform.position = m_SpawnPosition;
             m_CharacterController.transform.rotation = m_SpawnRotation;
             m_Health = m_DefaultHealth;
             m_CharacterController.enabled = true;
-            Debug.Log("Respawned!");
         }
 
         void OnTriggerEnter(Collider collider)
         {
             if (!photonView.IsMine) return;
 
-            Debug.Log("Collision");
             if (collider.CompareTag("AcidWater"))
                 Respawn();
         }

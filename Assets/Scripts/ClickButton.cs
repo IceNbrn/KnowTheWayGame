@@ -102,7 +102,6 @@ public class ClickButton : MonoBehaviour
         if (m_TempBridge != null)
         {
             float distance = Vector3.Distance(transform.position, m_TempBridge.transform.position);
-            Debug.Log($"Distance: {distance}");
             if (distance > 3f)
             {
                 m_TempBridge.SetActive(false);

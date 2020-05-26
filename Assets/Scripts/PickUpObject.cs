@@ -64,7 +64,6 @@ public class PickUpObject : MonoBehaviour
 
             m_Hit.transform.GetComponent<Rigidbody>().useGravity = false;
             m_Hit.transform.GetComponent<Rigidbody>().isKinematic = true;
-            Debug.Log("Clicked!");
         }
     }
 
@@ -94,7 +93,6 @@ public class PickUpObject : MonoBehaviour
     {
         if (m_GrabbedObject != null)
         {
-            Debug.Log($"Holding object");
             m_GrabbedObject.transform.position = holdObject.position;
             m_GrabbedObject.transform.rotation = holdObject.rotation;
         }
@@ -103,7 +101,6 @@ public class PickUpObject : MonoBehaviour
         {
             if(m_GrabbedObject != null && m_BoxPickup.IsColliding)
             {
-                Debug.Log($"Setting safe position {m_BoxPickup.SafePosition}");
                 m_GrabbedObject.transform.GetComponent<Rigidbody>().useGravity = true;
                 m_GrabbedObject.transform.GetComponent<Rigidbody>().isKinematic = false;
                 

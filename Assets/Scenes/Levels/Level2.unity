@@ -25268,7 +25268,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43014
+  m_Name: pb_Mesh332616
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -50293,7 +50293,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1538113583}
@@ -53359,7 +53359,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh40054
+  m_Name: pb_Mesh329618
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -82697,7 +82697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - Key-Truck
+  - Keycard
 --- !u!64 &4414569470774003988
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -69,30 +69,12 @@ namespace Controllers
         {
             if (photonView.IsMine)
             {
-                //Debug.Log(m_Speed);
                 m_bIsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
                 if (m_bIsGrounded && m_Velocity.y < 0)
                     m_Velocity.y = -2f;
 
                 Move();                
-
-                //if (Input.GetKeyDown(KeyCode.LeftControl) && !m_bIsCrouched)
-                //{
-                //    // Player is Crouching
-                //    m_Speed /= m_SprintSpeed;
-                //    m_bIsCrouched = true;
-                //    transform.localScale = new Vector3(1f, 0.7f, 1f);
-                //    transform.position = new Vector3(1f, transform.position.y - 0.7f, 1f);
-                //}
-                //else if (Input.GetKeyDown(KeyCode.LeftControl) && m_bIsCrouched)
-                //{
-                //    // Player is not Crouching
-                //    m_Speed *= m_SprintSpeed;
-                //    m_bIsCrouched = false;
-                //    transform.localScale = new Vector3(1f, 1f, 1f);
-                //    transform.position = new Vector3(1f, transform.position.y + 0.7f, 1f);
-                //}
 
                 m_Velocity.y += gravity * Time.deltaTime;
                 m_Controller.Move(m_Velocity * Time.deltaTime);
@@ -107,7 +89,6 @@ namespace Controllers
             Vector2 movementInput = m_Controls.Player.Move.ReadValue<Vector2>();
             if (movementInput.x > 0.0f || movementInput.y > 0.0f)
             {
-                Debug.Log($"MovementInput: {movementInput}");
                 m_Animator.SetBool("isWalking", true);
             }
             else if (movementInput.x < 0.0f || movementInput.y < 0.0f)

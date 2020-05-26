@@ -27,17 +27,21 @@ public class FinishGame : MonoBehaviour
         if (!other.gameObject.CompareTag(TagToTrigger)) return;
         if (other.gameObject.GetComponent<Inventory>())
         {
+            Debug.Log($"PlayerName {other.gameObject.GetComponent<PhotonView>().Owner.NickName}");
             Inventory inventory = other.gameObject.GetComponent<Inventory>();
-            if (inventory.items.Contains("Key-Truck"))
-            {
-                bool result = IsPlayerNearby(other.gameObject.transform.position);
+           
+            Debug.Log($"Contains Keycard");
+            bool result = IsPlayerNearby(other.gameObject.transform.position);
 
-                if (result)
+            if (result)
+            {
+                if (inventory.items.Contains("Keycard"))
                 {
                     Ui.SetActive(true);
                     StartCoroutine(LoadNextLevelCorountine());
                 }
             }
+            
         }
     }
 

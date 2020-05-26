@@ -43,8 +43,6 @@ namespace Controllers
 
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-
-                //m_Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
             }
         }
 
@@ -74,18 +72,6 @@ namespace Controllers
                 m_Camera.transform.localRotation = Quaternion.Euler(m_RotationX, 0f, 0f);
                 m_PlayerBody.Rotate(Vector3.up * movement.x);
             }
-        }
-
-        private void Look(Vector2 lookAxis)
-        {
-            /*
-            lookAxis.x *= mouseSensitivity * Time.deltaTime;
-            lookAxis.y *= mouseSensitivity * Time.deltaTime;
-
-            rotationX -= lookAxis.y;
-            rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f);
-            camera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
-            playerBody.Rotate(Vector3.up * lookAxis.x);*/
         }
     }
 }

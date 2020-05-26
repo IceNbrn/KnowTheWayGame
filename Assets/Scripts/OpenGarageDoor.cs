@@ -21,7 +21,7 @@ public class OpenGarageDoor : MonoBehaviourPun
         if (m_bIsOpen) return;
         
         photonView.RPC("RPC_OpenDoor", RpcTarget.AllBuffered, true);
-        m_Animator.SetTrigger("OpenDoorGarage");
+        
     }
 
     [PunRPC]
@@ -30,6 +30,6 @@ public class OpenGarageDoor : MonoBehaviourPun
         m_bIsOpen = isOpen;
         Color color = Color.green;
         Light.color = color;
-        
+        m_Animator.SetTrigger("OpenDoorGarage");
     }
 }
