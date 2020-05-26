@@ -28,10 +28,10 @@ public class OpenGarageDoor : MonoBehaviourPun
     [PunRPC]
     private void RPC_OpenDoor(bool isOpen)
     {
-        doorSound.Play(0);
         m_bIsOpen = isOpen;
         Color color = Color.green;
         Light.color = color;
         m_Animator.SetTrigger("OpenDoorGarage");
+        doorSound.Play(0);
     }
 }

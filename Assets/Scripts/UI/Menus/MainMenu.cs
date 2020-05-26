@@ -65,7 +65,7 @@ namespace UI.Menus
 
             waitingStatusText.text = "Searching . . .";
 
-            PhotonNetwork.OfflineMode = toggle.isOn;
+            //PhotonNetwork.OfflineMode = toggle.isOn;
 
             if (PhotonNetwork.IsConnected)
             {
