@@ -22,6 +22,25 @@ public class FinishGame : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag(TagToTrigger)) return;
+        if (other.gameObject.GetComponent<Inventory>())
+        {
+            Inventory inventory = other.gameObject.GetComponent<Inventory>();
+            if (inventory.items.Contains("Key-Truck"))
+            {
+                bool result = IsPlayerNearby(other.gameObject.transform.position);
+
+                if (result)
+                {
+                    Ui.SetActive(true);
+                    StartCoroutine(LoadNextLevelCorountine());
+                }
+            }
+        }
+    }
+
     private bool IsPlayerNearby(Vector3 playerPosition)
     {
         //if (!PhotonNetwork.IsMasterClient) return false;
@@ -34,7 +53,6 @@ public class FinishGame : MonoBehaviour
             if (countPlayers == 2)
                 return true;
         }
-
         return false;
     }
 
