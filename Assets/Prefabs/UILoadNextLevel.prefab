@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6508103036479823683}
   m_Layer: 0
-  m_Name: UI
+  m_Name: UILoadNextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

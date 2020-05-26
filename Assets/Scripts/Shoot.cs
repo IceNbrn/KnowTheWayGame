@@ -12,7 +12,7 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        InvokeRepeating("SpawnObject", 1, 2);
+        InvokeRepeating("SpawnObject", 1, 0.5f);
     }
 
     void SpawnObject()

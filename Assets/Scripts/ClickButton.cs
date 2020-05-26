@@ -12,6 +12,7 @@ public class ClickButton : MonoBehaviour
     private DJA m_Controls;
     private Transform m_CameraPosition;
     private ActivateHologramBridge m_TempBridge = null;
+    private Inventory m_PlayerInventory;
     
     // Start is called before the first frame update
     void Awake()
@@ -22,6 +23,8 @@ public class ClickButton : MonoBehaviour
         m_Controls.Player.InteractionButton.performed += OnPerformedInteraction;
         m_Controls.Player.InteractionButton.started += InteractionButtonOnStarted;
         m_Controls.Player.InteractionButton.canceled += InteractionButtonOnCanceled;
+
+        m_PlayerInventory = GetComponent<Inventory>();
     }
 
     private void InteractionButtonOnCanceled(InputAction.CallbackContext obj)
@@ -47,6 +50,12 @@ public class ClickButton : MonoBehaviour
             {
                 OpenGarageDoor openDoor = m_Hit.transform.GetComponent<OpenGarageDoor>();
                 openDoor.OpenDoor();
+            }
+            else if (m_Hit.transform.GetComponent<Inventory>())
+            {
+                Inventory objectInventory = m_Hit.transform.GetComponent<Inventory>();
+                m_PlayerInventory.Add(objectInventory.items);
+                objectInventory.items.Clear();
             }
         }
     }
