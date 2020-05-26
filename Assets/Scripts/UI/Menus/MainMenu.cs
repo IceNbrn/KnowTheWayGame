@@ -131,6 +131,14 @@ namespace UI.Menus
                 PhotonNetwork.ConnectUsingSettings();
             }
         }
+        public void CloseGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
+        }
 
         public override void OnConnectedToMaster()
         {
@@ -210,6 +218,7 @@ namespace UI.Menus
                 PhotonNetwork.LoadLevel(sceneToLoad);
             }
         }
+
     }
 }
 
