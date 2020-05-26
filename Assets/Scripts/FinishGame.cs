@@ -65,8 +65,13 @@ public class FinishGame : MonoBehaviour
         yield return new WaitForSeconds(5);
 
         Ui.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+            
 
     }
 
