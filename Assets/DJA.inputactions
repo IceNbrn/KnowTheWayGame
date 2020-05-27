@@ -329,6 +329,17 @@
                 },
                 {
                     "name": "",
+                    "id": "422abc06-5e61-4db3-8ce4-42b9e89115da",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "InteractionButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "34a6734b-8194-4d54-9a83-2172a91e9f7c",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",

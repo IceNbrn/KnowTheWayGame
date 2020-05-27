@@ -16,7 +16,7 @@ namespace Controllers
         public float jumpHeight = 3f;
 
         public Transform groundCheck;
-        public float groundDistance = 0.4f;
+        public float groundDistance = 0.5f;
         public LayerMask groundMask;
 
         private float m_Speed;
