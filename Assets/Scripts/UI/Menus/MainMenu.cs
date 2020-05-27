@@ -39,7 +39,8 @@ namespace UI.Menus
         [SerializeField] private GameObject findPlayerPanel = null;
         [SerializeField] private GameObject waitingStatusPanel = null;
         [SerializeField] private TextMeshProUGUI waitingStatusText = null;
-        [SerializeField] private Toggle toggle = null;
+
+        private string roomName;
 
         private LobbyFriend lobbyFriend;
         private bool IsHost;
@@ -79,6 +80,37 @@ namespace UI.Menus
             }
         }
 
+        public void CreateRoom(TMP_InputField roomName)
+        {
+            PhotonNetwork.CreateRoom(roomName.text, new RoomOptions {MaxPlayers = 2}, TypedLobby.Default);
+        }
+
+        public void JoinRoom(TMP_InputField roomName)
+        {
+            isConnecting = true;
+
+            findPlayerPanel.SetActive(false);
+            waitingStatusPanel.SetActive(true);
+
+            waitingStatusText.text = "Searching . . .";
+
+            this.roomName = roomName.text;
+
+            if (PhotonNetwork.IsConnected)
+            {
+                RoomOptions roomOptions = new RoomOptions();
+                roomOptions.CustomRoomPropertiesForLobby = new[] {roomName.text};
+                roomOptions.CustomRoomProperties = new Hashtable() { { "RoomName", roomName.text } };
+                roomOptions.MaxPlayers = 2;
+                PhotonNetwork.JoinOrCreateRoom(roomName.text, roomOptions, null);
+            }
+            else
+            {
+                PhotonNetwork.GameVersion = GameVersion;
+                PhotonNetwork.ConnectUsingSettings();
+            }
+        }
+
         public void Host(TMP_InputField password)
         {
             if (password == null || password.text == String.Empty) return;
@@ -103,9 +135,9 @@ namespace UI.Menus
         {
             if (password == null || password.text == String.Empty) return;
             lobbyFriend.Password = password.text;
-            FindFriend();
+            //FindFriend();
         }
-
+        /*
         public void FindFriend()
         {
             isConnecting = true;
@@ -130,7 +162,7 @@ namespace UI.Menus
                 PhotonNetwork.GameVersion = GameVersion;
                 PhotonNetwork.ConnectUsingSettings();
             }
-        }
+        }*/
         public void CloseGame()
         {
 #if UNITY_EDITOR
@@ -142,26 +174,20 @@ namespace UI.Menus
 
         public override void OnConnectedToMaster()
         {
-            Debug.Log("Connected to master!");
+            Debug.Log("Connected To Master");
 
             if (isConnecting)
             {
-                if (IsHost)
-                {
-                    string playerName = PhotonNetwork.LocalPlayer.NickName;
-
-                    RoomOptions roomOptions = new RoomOptions();
-                    roomOptions.CustomRoomPropertiesForLobby = new[] { playerName, lobbyFriend.Password };
-                    roomOptions.CustomRoomProperties = new Hashtable { { playerName, lobbyFriend.Password } };
-                    roomOptions.MaxPlayers = MaxPlayerPerRoom;
-
-                    PhotonNetwork.CreateRoom(playerName, roomOptions, TypedLobby.Default);
-                }
+                if(roomName == null)
+                    PhotonNetwork.JoinRandomRoom();
                 else
                 {
-                    PhotonNetwork.JoinRandomRoom();
+                    RoomOptions roomOptions = new RoomOptions();
+                    roomOptions.CustomRoomPropertiesForLobby = new[] { roomName };
+                    roomOptions.CustomRoomProperties = new Hashtable() { { "RoomName", roomName } };
+                    roomOptions.MaxPlayers = 2;
+                    PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, null);
                 }
-                
                 isConnecting = false;
             }
         }
