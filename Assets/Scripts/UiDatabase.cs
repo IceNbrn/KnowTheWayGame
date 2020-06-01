@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +13,7 @@ public class UiDatabase : MonoBehaviour
         private string username;
         private string password;
         private int nationalityId;
+        private int id;
 
         public string Username
         {
@@ -32,25 +33,27 @@ public class UiDatabase : MonoBehaviour
             set { nationalityId = value; }
         }
 
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public override string ToString()
         {
             return $"Username: {username}, Password: {password}, NationalityID: {nationalityId}";
         }
     }
 
-    public TextMeshProUGUI Text;
     public TMP_Dropdown DrpDownNacionality;
     public GameObject PanelFindPlayer, PanelLogin;
-    public TextMeshProUGUI TextInfo;
+    public TextMeshProUGUI TextInfo, PlayerName;
+    public TextMeshProUGUI m_PlayerId;
 
     private PlayerData m_PlayerData;
 
     private void Start()
     {
-        DataTable data = Database.Instance.ReturnQuery("SELECT * FROM Player WHERE PlayerID = 3");
-
-        Text.SetText(data.Rows[0][3].ToString());
-
         m_PlayerData = new PlayerData();
 
         LoadDropDownNationality();
@@ -93,6 +96,7 @@ public class UiDatabase : MonoBehaviour
         {
             PanelLogin.SetActive(false);
             PanelFindPlayer.SetActive(true);
+            m_PlayerData.Id = int.Parse(data.Rows[0][0].ToString());
         }
         else
         {
@@ -115,5 +119,29 @@ public class UiDatabase : MonoBehaviour
 
         DrpDownNacionality.AddOptions(options);
     }
+
+    public void EditUsername(TMP_InputField username)
+    {
+        string sql = "UPDATE Player SET Username = @username WHERE PlayerID = @id";
+        List<SqlParameter> parameters = new List<SqlParameter>()
+        {
+            new SqlParameter() {ParameterName="@username",SqlDbType=SqlDbType.VarChar,Value = username.text},
+            new SqlParameter() {ParameterName="@id",SqlDbType=SqlDbType.Int,Value = m_PlayerData.Id}
+        };
+
+        Database.Instance.ExecuteCmd(sql, parameters);
+
+    }
+    public void DeletePlayer()
+    {
+        string sql = "DELETE FROM Player WHERE PlayerID = @id";
+        List<SqlParameter> parameters = new List<SqlParameter>()
+        {
+            new SqlParameter() {ParameterName="@id",SqlDbType=SqlDbType.Int,Value = m_PlayerData.Id}
+        };
+
+        Database.Instance.ExecuteCmd(sql, parameters);
+
+        m_PlayerData.Id = 0;
+    }
 }
-*/
